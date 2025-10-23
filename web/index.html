@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каршеринг - Аренда автомобилей</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="homepage" class="homepage">
+        <div class="hero-section">
+            <div class="hero-background"></div>
+            <nav class="navbar">
+                <div class="nav-buttons">
+                    <button class="btn-login" onclick="showAuth()">Войти</button>
+                    <button class="btn-register" onclick="showRegisterPage()">Регистрация</button>
+                </div>
+            </nav>
+            
+            <div class="hero-content">
+                <div class="main-logo">CarShare</div>
+                <h1 class="hero-title">Свобода передвижения <br><span class="highlight">в одном клике</span></h1>
+                <p class="hero-subtitle">Выберите автомобиль мечты и отправляйтесь в путешествие. Каршеринг нового поколения уже здесь.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Автомобилей</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Доступность</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Довольных клиентов</span>
+                    </div>
+                </div>
+                <button class="cta-button" onclick="showAuth()">
+                    <span>Начать поездку</span>
+                    <span class="arrow">></span>
+                </button>
+            </div>
+        </div>
+
+        <div class="features-section">
+            <div class="container">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Быстрое бронирование</h3>
+                        <p>Забронируйте автомобиль за 30 секунд через наше приложение</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Выгодные цены</h3>
+                        <p>Платите только за время использования без скрытых платежей</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Безопасность</h3>
+                        <p>Все автомобили проходят техосмотр и застрахованы</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Экологично</h3>
+                        <p>Уменьшите углеродный след, используя каршеринг</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="auth-page" class="auth-page" style="display:none;">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="back-btn" onclick="showHomepage()">← Назад</button>
+                <h2>Вход в аккаунт</h2>
+            </div>
+            <div class="auth-form">
+                <div class="form-group">
+                    <input type="text" id="username" placeholder="Имя пользователя" class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" placeholder="Пароль" class="form-input">
+                </div>
+                <button onclick="login()" class="auth-submit-btn">Войти</button>
+                <p class="auth-switch">
+                    Нет аккаунта? <a href="#" onclick="showRegisterPage()">Зарегистрироваться</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="register-page" class="auth-page" style="display:none;">
+        <div class="auth-container">
+            <div class="auth-header">
+                <button class="back-btn" onclick="showHomepage()">← Назад</button>
+                <h2>Регистрация</h2>
+            </div>
+            <div class="auth-form">
+                <div class="form-group">
+                    <input type="text" id="reg_username" placeholder="Имя пользователя" class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="reg_email" placeholder="Email" class="form-input">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="reg_password" placeholder="Пароль" class="form-input">
+                </div>
+                <button onclick="register()" class="auth-submit-btn">Зарегистрироваться</button>
+                <p class="auth-switch">
+                    Уже есть аккаунт? <a href="#" onclick="showAuth()">Войти</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-app" style="display:none;">
+        <nav class="app-navbar">
+            <div class="app-logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">CarShare</span>
+            </div>
+            <div class="user-info">
+                <span id="user-greeting"> Добро пожаловать!</span>
+                <button onclick="logout()" class="logout-btn">Выйти</button>
+            </div>
+        </nav>
+
+        <div class="app-container">
+            <div class="app-section">
+                <h2 class="section-title"> Доступные машины</h2>
+                
+                <div class="filters-panel">
+                    <div class="filter-group">
+                        <label for="price-filter">Цена за час:</label>
+                        <select id="price-filter" onchange="applyFilters()">
+                            <option value="all">Все цены</option>
+                            <option value="0-10">До 10 руб</option>
+                            <option value="10-15">10-15 руб</option>
+                            <option value="15-20">15-20 руб</option>
+                            <option value="20+">Свыше 20 руб</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="status-filter">Статус:</label>
+                        <select id="status-filter" onchange="applyFilters()">
+                            <option value="all">Все машины</option>
+                            <option value="available">Доступные</option>
+                            <option value="booked">Забронированные</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="model-filter">Модель:</label>
+                        <input type="text" id="model-filter" placeholder="Поиск по модели..." oninput="applyFilters()">
+                    </div>
+                    
+                    <button class="reset-btn" onclick="resetFilters()">Сбросить</button>
+                </div>
+                
+                <div id="cars" class="cars-grid"></div>
+            </div>
+
+            <div class="app-section">
+                <h2 class="section-title"> Мои бронирования</h2>
+                <div id="orders" class="orders-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
